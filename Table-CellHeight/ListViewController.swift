@@ -60,19 +60,21 @@ class ListViewController: UITableViewController {
         // cell 아이디를 가진 셀을 읽어온다. 없으면 UITableViewCell 인스턴스를 생성한다 (Nil-Coalescing Operator)
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") ?? UITableViewCell()
 
+        // 셀의 기본 텍스트 레이블 행 수 제한을 없앤다
+        cell.textLabel?.numberOfLines = 0
         
         // 셀의 기본 텍스트 레이블에 배열 변수의 값을 할당
         cell.textLabel?.text = self.list[indexPath.row]
         
         return cell
-    }    
+    }
     
     // 입력된 글의 길이를 체크하여 셀의 높이를 조절해 줄 메소드
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let row = self.list[indexPath.row]
         
         // 높이를 조절해준다. 기본 높이 60 + 글의 길이가 30자를 넘어갈 때마다 20만큼씩 높이를 늘려준다
-        let height = CGFloat(60 + (row.count / 10) * 20)
+        let height = CGFloat(60 + (row.count / 30) * 20)
         NSLog("\(height)")
         
         return height
